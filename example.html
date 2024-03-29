@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./index.js"></script>
+</head>
+<body>
+  <button onclick="test()">Test</button>
+  <div id="root">
+
+  </div>
+  <script>
+    const root = document.getElementById('root');
+
+    unsafe__extend();
+
+    function test() {
+      let html = '';
+      for (const [key, value] of ({a: 1, b: 2, c: 3})) {
+        html += `
+          <div>${key} | ${value}</div>
+        `;
+      }
+      root.innerHTML = html;
+    }
+  </script>
+</body>
+</html>
