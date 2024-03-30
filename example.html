@@ -9,8 +9,19 @@
 <body>
   <button onclick="test()">Test</button>
   <div id="root">
-
+    
   </div>
+  
+  <hr />
+  <div>
+    <form name="inputJSONForm" onsubmit="event.preventDefault(); renderJSON(event)">
+      <div>
+        <textarea name="jsonText" placeholder="input json text"></textarea>
+      </div>
+      <button>render</button>
+    </form>
+  </div>
+  <div id="json"></div>
   <script>
     const root = document.getElementById('root');
 
@@ -24,6 +35,20 @@
         `;
       }
       root.innerHTML = html;
+    }
+
+    function renderJSON(e) {
+      e.preventDefault();
+      try {
+        const value = event.target.jsonText.value;
+        let data = value;
+        if (typeof value === 'string') {
+          data = JSON.parse(data.replace(/\n/g, ''));
+        }
+        document.getElementById('json').innerHTML = JSON.stringifyHTML(data, 4);
+      } catch(err) {
+        alert(err);
+      }
     }
   </script>
 </body>
